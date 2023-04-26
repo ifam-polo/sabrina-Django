@@ -13,15 +13,20 @@
             </a>
         </h2>
     </div>
+
     <div class="recipe-author">
-        <span class="recipe-author-item">
-            <i class="fas fa-user"></i>
-            {% if recipe.author.first_name %}
-                {{ recipe.author.first_name }} {{ recipe.author.last_name }}
-            {% else %}
-                {{ recipe.author.username }}
-            {% endif %}
-        </span>
+
+        {% if recipe.author is not None %}
+            <span class="recipe-author-item">
+                <i class="fas fa-user"></i>
+                {% if recipe.author.first_name %}
+                    {{ recipe.author.first_name }} {{ recipe.author.last_name }}
+                {% else %}
+                    {{ recipe.author.username }}
+                {% endif %}
+            </span>
+        {% endif %}
+
         <span class="recipe-author-item">
             <i class="fas fa-calendar-alt"></i>
             {{ recipe.created_at|date:"d/m/Y" }} às {{ recipe.created_at|date:"H:i" }}
@@ -40,6 +45,7 @@
     <div class="recipe-content">
         <p>{{ recipe.description }}</p>
     </div>
+
     <div class="recipe-meta-container">
         <div class="recipe-meta recipe-preparation">
             <h3 class="recipe-meta-title"><i class="fas fa-stopwatch"></i> Preparo</h3>
@@ -54,6 +60,7 @@
             </div>
         </div>
     </div>
+
     {% if is_detail_page is not True %}
         <footer class="recipe-footer">
             <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:recipe' recipe.id %}">
@@ -62,9 +69,11 @@
             </a>
         </footer>
     {% endif %}
+
     {% if is_detail_page is True %}
         <div class="preparation-steps">
             {{ recipe.preparation_steps|linebreaksbr }}
         </div>
     {% endif %}
+
 </div>
