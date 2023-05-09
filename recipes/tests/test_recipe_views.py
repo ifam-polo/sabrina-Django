@@ -37,7 +37,7 @@ class RecipeViewsTest(TestCase):
         recipe = Recipe.objects.create(
             category = category,
             author = author,
-            title = 'Recipe title',
+            title = 'Recipe Title',
             description = 'recipe Description',
             slug = 'recipe-slug',
             preparation_time = 10,
@@ -49,7 +49,13 @@ class RecipeViewsTest(TestCase):
             is_published =True,
         )
         response = self.client.get(reverse('recipes:home'))
-        pass
+        content = response.content.decode('utf-8')
+        response_context_recipes = response.context['recipes']
+        self.assertIn('Recipe Title', content)
+        self.assertIn('10 Minutos', content)
+        self.assertIn('10 Porções', content)
+        self.assertEqual(len(response_context_recipes),1)
+     
 
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse('recipes:category', kwargs={'category_id': 1}))
