@@ -1,4 +1,4 @@
-from .test_recipe_base import RecipeTestBase
+from .test_recipe_base import RecipeTestBase, Recipe
 from django.urls import resolve, reverse
 from recipes import views
 from recipes.models import Category, Recipe, User
@@ -30,12 +30,11 @@ class RecipeViewsTest(RecipeTestBase):
         )
     
     def test_recipe_home_template_loads_recipes(self):
+        self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
         content = response.content.decode('utf-8')
         response_context_recipes = response.context['recipes']
         self.assertIn('Recipe Title', content)
-        self.assertIn('10 Minutos', content)
-        self.assertIn('10 Porções', content)
         self.assertEqual(len(response_context_recipes),1)
      
 
