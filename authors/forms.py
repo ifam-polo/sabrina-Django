@@ -79,6 +79,7 @@ class RegisterForm(forms.ModelForm):
             'username': {
                 'required': 'This field must not be empty',
             }
+           
         }
 
     def clean(self):
