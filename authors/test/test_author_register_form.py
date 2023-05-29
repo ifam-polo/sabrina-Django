@@ -58,8 +58,8 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
             'first_name': 'first',
             'last_name': 'last',
             'email': 'email@anyemail.com',
-            'password': '1',
-            'password2': '1',
+            'password': 'Str0ngP@ssword1',
+            'password2': 'Str0ngP@ssword1',
         }
         return super().setUp(*args, **kwargs)
 
@@ -142,7 +142,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         url = reverse('authors:register_create')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
-              
+
     def test_email_field_must_be_unique(self):
         url = reverse('authors:register_create')
 
@@ -151,7 +151,6 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
 
         msg = 'User e-mail is already in use'
         self.assertIn(msg, response.context['form'].errors.get('email'))
-        print(response.context)
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_author_created_can_login(self):
