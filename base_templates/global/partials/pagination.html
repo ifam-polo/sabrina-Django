@@ -9,7 +9,7 @@
       {% for page in pagination_range.pagination %}
         {% if pagination_range.current_page == page %}
           <a class="page-link page-item page-current" 
-          aria-label="Current page {{ page}}"
+          aria-label="Csurrent page {{ page}}"
           aria-current="true"
           href="?page={{ page }}{{ additional_url_query }}">{{ page }}</a>
         {% else %}
