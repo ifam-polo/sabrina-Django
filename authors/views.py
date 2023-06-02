@@ -129,7 +129,7 @@ def dashboard_recipe_edit(request, id):
 
         recipe.save()
 
-        messages.sucess(request, 'Sua receita foi salva com sucesso!')
+        messages.success(request, 'Sua receita foi salva com sucesso!')
         return redirect(reverse('authors:dashboard_recipe_edit', args=(id,)))
 
     return render(
@@ -173,7 +173,12 @@ def dashboard_recipe_new(request):
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
-def dashboard_recipe_delete(request, id):
+def dashboard_recipe_delete(request):
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    id = POST.get('id')
     recipe = Recipe.objects.filter(
         is_published=False,
         author=request.user,
