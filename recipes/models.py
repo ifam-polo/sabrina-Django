@@ -1,6 +1,7 @@
 # flake8:noqa
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -23,7 +24,8 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=None)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
+    cover = models.ImageField(
+        upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True,
         default=None
@@ -33,4 +35,7 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return self.title 
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('recipes:recipe', args=(self.id,))
