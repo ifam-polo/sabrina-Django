@@ -2,8 +2,11 @@ asgiref==3.6.0
 async-generator==1.10
 attrs==23.1.0
 certifi==2022.12.7
+cffi==1.15.1
 chardet==4.0.0
+colorama==0.4.6
 Django==3.2.12
+django-debug-toolbar==4.1.0
 exceptiongroup==1.1.1
 Faker==18.4.0
 flake8==6.0.0
@@ -22,6 +25,7 @@ Pillow==9.0.1
 pluggy==1.0.0
 ply==3.11
 pycodestyle==2.10.0
+pycparser==2.21
 pyflakes==3.0.1
 PySocks==1.7.1
 pytest==7.3.1
