@@ -12,6 +12,7 @@ class TagInline(GenericStackedInline):
     fields = 'name',
     extra = 1
     
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = 'id', 'name', 'slug',
