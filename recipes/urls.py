@@ -12,7 +12,7 @@ urlpatterns = [
     ),
     path(
         'recipes/tag/<slug:slug>',
-        views.RecipeListViewTag.as_view(), name="tags"
+        views.RecipeListViewTag.as_view(), name="tag"
     ),
     
     path(
