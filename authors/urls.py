@@ -31,6 +31,6 @@ urlpatterns = [
         views.ProfileView.as_view(),
         name='profile'
     ),
-
-
 ]
+
+
