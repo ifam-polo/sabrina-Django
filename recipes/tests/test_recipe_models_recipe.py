@@ -1,19 +1,19 @@
-from .test_recipe_base import RecipeTestBase, Recipe
 from django.core.exceptions import ValidationError
 from parameterized import parameterized
 
+from .test_recipe_base import Recipe, RecipeTestBase
 
 
 class RecipeModelTest(RecipeTestBase):
-    def setUp(self)-> None:
+    def setUp(self) -> None:
         self.recipe = self.make_recipe()
-        return super().setUp
-    
+        return super().setUp()
+
     def make_recipe_no_defaults(self):
         recipe = Recipe(
             category=self.make_category(name='Test Default Category'),
             author=self.make_author(username='newuser'),
-            title='Recipe Title',
+            title='Recipe Title 1',
             description='Recipe Description',
             slug='recipe-slug-for-no-defaults',
             preparation_time=10,
@@ -25,10 +25,8 @@ class RecipeModelTest(RecipeTestBase):
         recipe.full_clean()
         recipe.save()
         return recipe
-        
 
     @parameterized.expand([
-
         ('title', 65),
         ('description', 165),
         ('preparation_time_unit', 65),
@@ -52,8 +50,7 @@ class RecipeModelTest(RecipeTestBase):
             recipe.is_published,
             msg='Recipe is_published is not False',
         )
-        
-    
+
     def test_recipe_string_representation(self):
         needed = 'Testing Representation'
         self.recipe.title = needed
