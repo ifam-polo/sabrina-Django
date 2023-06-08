@@ -8,6 +8,7 @@ colorama==0.4.6
 coverage==7.2.7
 Django==3.2.12
 django-debug-toolbar==4.1.0
+djangorestframework==3.14.0
 exceptiongroup==1.1.1
 Faker==18.4.0
 flake8==6.0.0
