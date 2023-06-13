@@ -4,12 +4,12 @@ from rest_framework.response import Response
 from tag.models import Tag
 
 from ..models import Recipe
-from ..serializers import RecipeSerializer,TagSerializer
+from ..serializers import RecipeSerializer, TagSerializer
 
 
 @api_view()
 def recipe_api_list(request):
-    recipes = Recipe.objects.get_published()[:10]
+    recipes = Recipe.objects.filter(is_published=True)[:10]
     serializer = RecipeSerializer(
         instance=recipes,
         many=True,
@@ -21,7 +21,7 @@ def recipe_api_list(request):
 @api_view()
 def recipe_api_detail(request, pk):
     recipe = get_object_or_404(
-        Recipe.objects.get_published(),
+        Recipe.objects.filter(is_published=True),
         pk=pk
     )
     serializer = RecipeSerializer(

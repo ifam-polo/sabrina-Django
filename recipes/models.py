@@ -66,7 +66,7 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse('recipes:recipe', args=(self.id,))
-    
+
     @staticmethod
     def resize_image(image, new_width=800):
         image_full_path = os.path.join(settings.MEDIA_ROOT, image.name)
@@ -88,11 +88,16 @@ class Recipe(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f'{slugify(self.title)}'
-            self.slug = slug
-            
+            rand_letters = ''.join(
+                SystemRandom().choices(
+                    string.ascii_letters + string.digits,
+                    k=5,
+                )
+            )
+            self.slug = slugify(f'{self.title}-{rand_letters}')
+
         saved = super().save(*args, **kwargs)
-            
+
         if self.cover:
             try:
                 self.resize_image(self.cover, 840)
@@ -100,7 +105,7 @@ class Recipe(models.Model):
                 ...
 
         return saved
-    
+
     def clean(self, *args, **kwargs):
         error_messages = defaultdict(list)
 
@@ -116,7 +121,10 @@ class Recipe(models.Model):
 
         if error_messages:
             raise ValidationError(error_messages)
+        
 
-class Meta:
+    class Meta:
         verbose_name = _('Recipe')
         verbose_name_plural = _('Recipes')
+        
+        
