@@ -14,6 +14,8 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from tag.models import Tag
+from random import SystemRandom
+import string
 
 class Category(models.Model):
     name = models.CharField(max_length=65)

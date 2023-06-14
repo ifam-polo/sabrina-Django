@@ -11,7 +11,7 @@ from ..serializers import RecipeSerializer, TagSerializer
 @api_view(http_method_names=['get', 'post'])
 def recipe_api_list(request):
     if request.method == 'GET':
-        recipes = Recipe.objects.get_published()[:10]
+        recipes = Recipe.objects.filter(is_published=True)[:10]
         serializer = RecipeSerializer(
             instance=recipes,
             many=True,
@@ -23,7 +23,7 @@ def recipe_api_list(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            serializer.validated_data,
+            serializer.data,
             status=status.HTTP_201_CREATED
         )
 
