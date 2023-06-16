@@ -9,6 +9,7 @@ coverage==7.2.7
 Django==3.2.12
 django-debug-toolbar==4.1.0
 djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
 exceptiongroup==1.1.1
 Faker==18.4.0
 flake8==6.0.0
@@ -29,6 +30,7 @@ ply==3.11
 pycodestyle==2.10.0
 pycparser==2.21
 pyflakes==3.0.1
+PyJWT==2.7.0
 PySocks==1.7.1
 pytest==7.3.1
 pytest-django==4.5.2
